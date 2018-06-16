@@ -73,6 +73,10 @@ function setup (swarm, peer, id) {
     swarm.emit('peer', peer, id)
     swarm.emit('connect', peer, id)
   })
+  
+  peer.on('stream', function (stream) {
+    swarm.emit('stream', stream, id);
+  });
 
   var onclose = once(function (err) {
     debug('disconnected from peer', id, err)
